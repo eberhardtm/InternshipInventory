@@ -20,7 +20,9 @@ script:
 after_script:
 - vendor/bin/test-reporter
 after_success:
+- nvm install 4
 - npm run build
+- rm -rf node_modules
 - tar -cf Internshipinventory.tar.gz *
 addons:
   code_climate:
