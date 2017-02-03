@@ -12,7 +12,9 @@ node_js:
 - "5"
 - "4"
 - "0.1"
-script: "npm build"
+install:
+- npm install
+- npm build
 script:
 - ".travis-build/phplint ."
 - phpunit
