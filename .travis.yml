@@ -19,7 +19,7 @@ script:
 - phpunit
 after_script:
 - vendor/bin/test-reporter
-after_success
+after_success:
 - npm run build
 - tar -cvf Internshipinventory.tar.gz *
 addons:
