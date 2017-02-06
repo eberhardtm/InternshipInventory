@@ -29,8 +29,8 @@ after_success:
     - tar -cf Internshipinventory.tar.gz *
 
 addons:
-    code_climate:
-	repo_token: 3060bdda5db8f779d82ab527acadec5cd581bde782093136322604a4280162e7
+  code_climate:
+    repo_token: 3060bdda5db8f779d82ab527acadec5cd581bde782093136322604a4280162e7
 
 notifications: 
 
