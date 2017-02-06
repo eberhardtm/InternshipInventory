@@ -1,4 +1,5 @@
 sudo: false
+
 language: php
 php:
     - 5.3
@@ -25,7 +26,7 @@ after_script:
 after_success:
     - npm run build
     - rm -rf node_modules
-    - tar -cf Internshipinventory.tar.gz *
+    - tar -czf Internshipinventory.tgz *
 
 addons:
   code_climate:
