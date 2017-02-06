@@ -8,10 +8,8 @@ php:
     - 5.6
     - hhvm
 
-before_install:
-    - nvm install 6
-
 install:
+    - nvm install 6
     - npm install -g yarn
     - yarn global add bower
     #- "npm config set spin false"
@@ -19,8 +17,31 @@ install:
     - yarn install
 
 script:
-    - npm run build
     - ".travis-build/phplint ."
     - phpunit
 
-notifications:
+after_script:
+    - vendor/bin/test-reporter
+
+after_success:
+    - npm run build
+    - rm -rf node_modules
+    - tar -cf Internshipinventory.tar.gz *
+
+addons:
+    code_climate:
+	repo_token: 3060bdda5db8f779d82ab527acadec5cd581bde782093136322604a4280162e7
+
+notifications: 
+
+deploy:
+    provider: releases
+    skip_cleanup: true
+    api_key:
+	secure: GFMI2vZio7HKeLuHQ21eytiLTVPV06hCNaAE6WIrSX/tUcgA40XxQkJLSn4VheeoYoEz2q7LTJE2GbNlqw6wTkcdLRo61ayTZAZpNE8mII/JBLXW6xjoVAx4vjucsXZGMDKGBTjQJIbTvHE3JeiRiAcSn5lSpcSzCONGSyQr5nF4gQaNDEfrgsICPy+BonRdyQ+QPEr8IslDT/buzsiP86iiy3cOFAJa3BqP3m4Wk4VBO/ipAwVm1JgspeQtbuGgofdVTrPmS1sJqrHhWUroAGvHik3bPlFTNkC9FcNxPSwesvLLlm72JjH+qXCW8TW/uAimqBXZQ2qv7rOvFKSIFzcMhFejA+4Zr2LAmUionhgmvcGViLe6G5RNLne8xkgvn3mAaMZdT8oBH5I8sB26I5mm/T4uoVjQixen900Bl/OEjECO1CWwLXpxBIMvzotcBISIVZ08MIaVdjQzmqfaDmoRs6+VaMZtL1iuj3qmJ2AvSyfAKkEo33TGZsQNIGwi2Shu8m4e2byFSflYe32RMaA7+0hw/QQ/CrBEjTsZyfkrEwneXL47fbBp1mQwjU0ACTDAkPXnZqLQZ7Bo0ZjatU2srmMz+xYr4kQfebdtEa6zPvoiyPML71sHwnaDAJ7LJhei2mYsSOVBXMDeYsm05JQyeTedsNN6mTHiBiLU5qw=
+    file: Internshipinventory.tar.gz
+    overwrite: true
+    on:
+	repo: eberhardtm/InternshipInventory
+    	branch: useWebpack
+    	tags: true
