@@ -43,5 +43,5 @@ deploy:
     overwrite: true
     on:
       repo: eberhardtm/InternshipInventory
-      branch: useWebpack
+      branch: termDates
       tags: true
